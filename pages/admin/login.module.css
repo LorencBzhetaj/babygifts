@@ -1,0 +1,120 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #faf5ef 0%, #f4ece2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Jost', sans-serif;
+}
+
+.card {
+  background: white;
+  border-radius: 2rem;
+  padding: 3rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(42,26,30,0.1);
+  text-align: center;
+}
+
+.logo {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #2a1a1e;
+  margin-bottom: 0.3rem;
+}
+
+.sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a08888;
+  margin-bottom: 2.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a5a5a;
+  font-weight: 400;
+}
+
+.field input {
+  padding: 0.9rem 1.2rem;
+  border: 1.5px solid #e8c4c4;
+  border-radius: 0.8rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  color: #2a1a1e;
+  background: #faf5ef;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #9e5a6a;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  font-size: 0.82rem;
+}
+
+.btn {
+  background: #9e5a6a;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 0.5rem;
+}
+
+.btn:hover:not(:disabled) {
+  background: #c4963c;
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.back {
+  display: block;
+  margin-top: 1.8rem;
+  font-size: 0.75rem;
+  color: #a08888;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back:hover { color: #9e5a6a; }

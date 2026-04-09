@@ -1,0 +1,150 @@
+.about {
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 6rem;
+}
+
+.imgs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  position: relative;
+}
+
+.imgItem {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  height: 290px;
+  position: relative;
+}
+
+.imgItem:first-child {
+  border-radius: 2.5rem 1.5rem 1.5rem 2.5rem;
+}
+
+.imgSecond {
+  border-radius: 1.5rem 2.5rem 2.5rem 1.5rem;
+}
+
+.imgInner {
+  width: 100%; height: 100%;
+  position: relative;
+  transition: transform 0.55s;
+}
+
+.imgItem:hover .imgInner {
+  transform: scale(1.04);
+}
+
+.floatBadge {
+  position: absolute;
+  bottom: -2rem; right: -2rem;
+  background: var(--deep-rose);
+  color: white;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(158,90,106,0.4);
+  line-height: 1.2;
+}
+
+.floatNum {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  display: block;
+  line-height: 1;
+}
+
+.floatLabel {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  display: block;
+  margin-top: 3px;
+}
+
+.text { }
+
+.para {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: var(--text-mid);
+  margin-bottom: 1.2rem;
+}
+
+.pullQuote {
+  border-left: 2px solid var(--gold);
+  padding: 0.9rem 1.4rem;
+  margin: 2rem 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.55;
+  color: var(--deep-rose);
+}
+
+.features {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: 1rem;
+  background: var(--cream);
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.feat:hover {
+  background: var(--blush);
+  transform: translateX(6px);
+}
+
+.featIcon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blush), var(--rose));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.featTitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 0.25rem;
+}
+
+.featDesc {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+
+@media (max-width: 1024px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .floatBadge {
+    bottom: -1.5rem; right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .imgs {
+    grid-template-columns: 1fr;
+  }
+  .imgItem { height: 220px; }
+  .imgSecond { display: none; }
+}

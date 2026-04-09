@@ -1,0 +1,413 @@
+/* ─── ROOT VARIABLES ─── */
+:root {
+  --cream: #faf5ef;
+  --white: #ffffff;
+  --parchment: #f4ece2;
+  --blush: #f5dede;
+  --blush-deep: #e8c4c4;
+  --rose: #c9909a;
+  --deep-rose: #9e5a6a;
+  --dark: #2a1a1e;
+  --gold: #c4963c;
+  --gold-pale: #e8d4a8;
+  --sand: #e8ddd1;
+  --text-mid: #7a5a5a;
+  --text-light: #a08888;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--dark);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+::selection {
+  background: var(--blush-deep);
+  color: var(--dark);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blush-deep);
+  border-radius: 10px;
+}
+
+/* ─── SCROLL REVEAL ─── */
+.r {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
+}
+
+.r.on {
+  opacity: 1;
+  transform: none;
+}
+
+.r2 { transition-delay: 0.1s; }
+.r3 { transition-delay: 0.2s; }
+.r4 { transition-delay: 0.3s; }
+.r5 { transition-delay: 0.4s; }
+
+/* ─── MARQUEE STRIP ─── */
+.strip {
+  background: linear-gradient(135deg, var(--deep-rose), var(--rose));
+  padding: 0.85rem 0;
+  overflow: hidden;
+}
+
+.stripInner {
+  display: flex;
+  gap: 2.5rem;
+  animation: stripScroll 28s linear infinite;
+  white-space: nowrap;
+}
+
+.stripInner span {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  font-weight: 300;
+}
+
+.stripDot {
+  color: rgba(255,255,255,0.4) !important;
+}
+
+@keyframes stripScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ─── SECTION BASE ─── */
+section {
+  padding: 7rem 4.5rem;
+}
+
+.sTag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+
+.serifH2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+}
+
+.serifH2 em {
+  font-style: italic;
+  color: var(--deep-rose);
+}
+
+/* ─── BUTTONS ─── */
+.btnPrimary {
+  background: var(--deep-rose);
+  color: white;
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  transition: all 0.35s;
+  display: inline-block;
+  box-shadow: 0 6px 22px rgba(158,90,106,0.35);
+  cursor: pointer;
+  border: none;
+  font-family: 'Jost', sans-serif;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(158,90,106,0.45);
+}
+
+.btnSecondary {
+  border: 1.5px solid var(--rose);
+  color: var(--deep-rose);
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 300;
+  transition: all 0.3s;
+  display: inline-block;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+
+.btnSecondary:hover {
+  background: var(--rose);
+  color: white;
+}
+
+/* ─── MODAL OVERLAY ─── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(42,26,30,0.72);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalBox {
+  background: var(--white);
+  border-radius: 2rem;
+  width: 100%;
+  max-width: 880px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.35s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: none; }
+}
+
+.modalClose {
+  position: sticky;
+  top: 1rem;
+  float: right;
+  margin: 1rem 1rem 0 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--blush);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--deep-rose);
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.modalClose:hover {
+  background: var(--rose);
+  color: white;
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.modalImages {
+  padding: 1.5rem;
+}
+
+.modalMainImg {
+  width: 100%;
+  height: 320px;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+  background: var(--blush);
+}
+
+.modalMainImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modalThumbs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalThumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+  background: var(--blush);
+}
+
+.modalThumb.active {
+  border-color: var(--rose);
+}
+
+.modalThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modalContent {
+  padding: 2.5rem 2rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.modalBadge {
+  display: inline-block;
+  background: var(--gold);
+  color: white;
+  padding: 0.28rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.modalTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.modalPrice {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  color: var(--deep-rose);
+  margin-bottom: 1.2rem;
+}
+
+.modalDesc {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 1.5rem;
+}
+
+.modalIncludes {
+  background: var(--cream);
+  border-radius: 1rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.modalIncludes h4 {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+
+.modalIncludes ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.modalIncludes ul li {
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modalIncludes ul li::before {
+  content: '✦';
+  color: var(--rose);
+  font-size: 0.5rem;
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.btnWhatsapp {
+  flex: 1;
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Jost', sans-serif;
+}
+
+.btnWhatsapp:hover {
+  background: #1eb050;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  section { padding: 5rem 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .modalGrid {
+    grid-template-columns: 1fr;
+  }
+  .modalContent {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  section { padding: 4rem 1.5rem; }
+}
