@@ -92,6 +92,7 @@
   flex: 1;
   padding: 2.5rem;
   overflow-y: auto;
+  min-width: 0;
 }
 
 /* ── Page Header ── */
@@ -129,6 +130,7 @@
   cursor: pointer;
   transition: all 0.3s;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .btnAdd:hover { background: #c4963c; transform: translateY(-1px); }
@@ -143,6 +145,7 @@
   font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .btnSecondary:hover { border-color: #9e5a6a; color: #9e5a6a; }
@@ -157,6 +160,7 @@
   transition: all 0.2s;
   color: #7a5a5a;
   font-family: 'Jost', sans-serif;
+  white-space: nowrap;
 }
 
 .btnEdit:hover { background: #e8d4a8; color: #2a1a1e; }
@@ -223,13 +227,16 @@
 .productRow:hover { box-shadow: 0 4px 16px rgba(42,26,30,0.08); }
 
 .productRowImg {
-  width: 72px; height: 72px;
+  width: 72px;
+  height: 72px;
   border-radius: 0.8rem;
   overflow: hidden;
   flex-shrink: 0;
   background: #f4ece2;
   position: relative;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .noImgIcon { font-size: 1.8rem; }
@@ -393,7 +400,8 @@
 }
 
 .checkboxLabel input[type="checkbox"] {
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   border-radius: 4px;
   accent-color: #9e5a6a;
   padding: 0 !important;
@@ -453,7 +461,8 @@
 }
 
 .imgThumb {
-  width: 90px; height: 90px;
+  width: 90px;
+  height: 90px;
   border-radius: 0.7rem;
   overflow: visible;
   position: relative;
@@ -464,7 +473,8 @@
 .imgThumbMain { border-color: #9e5a6a; }
 
 .imgThumbInner {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
   position: relative;
@@ -472,7 +482,9 @@
 
 .imgThumbActions {
   position: absolute;
-  bottom: -8px; left: 0; right: 0;
+  bottom: -8px;
+  left: 0;
+  right: 0;
   display: flex;
   gap: 3px;
   justify-content: center;
@@ -480,12 +492,15 @@
 
 .imgBtnMain,
 .imgBtnRemove {
-  width: 24px; height: 24px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
   font-size: 0.65rem;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s;
 }
 
@@ -501,7 +516,8 @@
   font-size: 0.55rem;
   padding: 0.1rem 0.4rem;
   border-radius: 50px;
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
   white-space: nowrap;
 }
 
@@ -519,14 +535,17 @@
 /* ── Toast ── */
 .toast {
   position: fixed;
-  bottom: 2rem; right: 2rem;
+  bottom: 2rem;
+  right: 2rem;
   padding: 1rem 1.5rem;
   border-radius: 0.8rem;
   font-size: 0.85rem;
   z-index: 9999;
   animation: toastIn 0.3s ease;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  display: flex; align-items: center; gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .toastSuccess { background: #2a1a1e; color: white; }
@@ -539,11 +558,14 @@
 
 /* ── Confirm Delete ── */
 .confirmOverlay {
-  position: fixed; inset: 0;
+  position: fixed;
+  inset: 0;
   background: rgba(42,26,30,0.6);
   backdrop-filter: blur(6px);
   z-index: 2000;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
 }
 
@@ -569,19 +591,27 @@
 .confirmActions { display: flex; gap: 0.8rem; justify-content: center; margin-top: 1.8rem; }
 
 .btnCancel {
-  background: #f4ece2; color: #7a5a5a;
-  border: none; padding: 0.75rem 1.5rem;
-  border-radius: 50px; cursor: pointer;
-  font-family: 'Jost', sans-serif; font-size: 0.85rem;
+  background: #f4ece2;
+  color: #7a5a5a;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
   transition: all 0.2s;
 }
 .btnCancel:hover { background: #e8ddd1; }
 
 .btnDeleteConfirm {
-  background: #991b1b; color: white;
-  border: none; padding: 0.75rem 1.5rem;
-  border-radius: 50px; cursor: pointer;
-  font-family: 'Jost', sans-serif; font-size: 0.85rem;
+  background: #991b1b;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
   transition: all 0.2s;
 }
 .btnDeleteConfirm:hover { background: #7f1d1d; }
@@ -589,16 +619,20 @@
 /* ── Loading ── */
 .loadingScreen {
   min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
   background: #f8f4f0;
-  color: #7a5a5a; font-size: 0.9rem;
+  color: #7a5a5a;
+  font-size: 0.9rem;
 }
 
 .loadingSpinner,
 .spinner {
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border: 3px solid #e8c4c4;
   border-top-color: #9e5a6a;
   border-radius: 50%;
@@ -617,12 +651,121 @@
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    position: fixed; left: 0; top: 0; bottom: 0;
-    transform: translateX(-100%);
-    z-index: 100;
+  /* Sidebar bëhet top bar horizontal */
+  .layout {
+    flex-direction: column;
   }
-  .main { padding: 1.5rem; }
-  .productRow { flex-wrap: wrap; }
-  .productRowDesc { max-width: 100%; }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    gap: 0.5rem;
+    z-index: 100;
+    overflow-x: auto;
+  }
+
+  .sidebarLogo {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    padding-right: 1rem;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .sideNav {
+    flex-direction: row;
+    flex: 1;
+    gap: 0.3rem;
+    overflow-x: auto;
+  }
+
+  .navItem {
+    white-space: nowrap;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .logoutBtn {
+    margin-top: 0;
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  /* Main content */
+  .main {
+    padding: 1rem;
+  }
+
+  /* Product row — ruaj rreshtin horizontal */
+  .productRow {
+    gap: 0.8rem;
+    padding: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .productRowImg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .productRowInfo {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .productRowDesc {
+    display: none;
+  }
+
+  .productRowPrice {
+    font-size: 0.95rem;
+  }
+
+  .productRowActions {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .btnEdit {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.7rem;
+  }
+
+  .btnDelete {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  /* Form actions në mobile */
+  .formActions {
+    flex-direction: column;
+  }
+
+  .formActions button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Toast në mobile */
+  .toast {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Page header */
+  .pageTitle {
+    font-size: 1.5rem;
+  }
 }
