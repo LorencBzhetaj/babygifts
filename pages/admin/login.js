@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from './login.module.css';
+import { verifySessionToken } from '../../lib/auth';
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');

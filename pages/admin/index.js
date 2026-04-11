@@ -4,11 +4,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from './index.module.css';
 import { parse } from 'cookie';
+import { verifySessionToken } from '../../lib/auth';
 
 export async function getServerSideProps({ req }) {
   const cookies = parse(req.headers.cookie || '');
-  const isAuth = cookies['admin_session'] === 
-    (process.env.ADMIN_PASSWORD || 'babygifts2025admin');
+  const token = cookies['admin_session'];
+  const isAuth = token ? verifySessionToken(token) : false;
 
   if (!isAuth) {
     return {
@@ -125,16 +126,23 @@ export default function AdminPanel() {
   };
 
   // ── Remove image ──
-  const removeImage = (url) => {
-    setForm(prev => {
-      const newImages = prev.images.filter(i => i !== url);
-      return {
-        ...prev,
-        images: newImages,
-        mainImage: prev.mainImage === url ? (newImages[0] || '') : prev.mainImage,
-      };
+  const removeImage = async (url) => {
+  if (url.includes('cloudinary.com')) {
+    await fetch('/api/admin/delete-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
     });
-  };
+  }
+  setForm(prev => {
+    const newImages = prev.images.filter(i => i !== url);
+    return {
+      ...prev,
+      images: newImages,
+      mainImage: prev.mainImage === url ? (newImages[0] || '') : prev.mainImage,
+    };
+  });
+};
 
   // ── Save product ──
   const handleSave = async (e) => {

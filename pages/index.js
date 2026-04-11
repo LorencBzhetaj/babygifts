@@ -6,7 +6,8 @@ import About from '../components/About';
 import Products from '../components/Products';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import { getProducts } from '../lib/products';
+import connectDB from '../lib/mongodb';
+import Product from '../lib/models/Product';
 
 export default function Home({ products }) {
   const siteUrl = 'https://www.babygiftsalbania.al';
@@ -75,7 +76,7 @@ export default function Home({ products }) {
             '@type': 'Product',
             name: p.name,
             description: p.description,
-            image: `${siteUrl}${p.mainImage || p.images?.[0]}`,
+            image: p.mainImage || p.images?.[0] || '',
             offers: {
               '@type': 'Offer',
               price: p.price,
@@ -96,17 +97,7 @@ export default function Home({ products }) {
         {/* ── Primary Meta ── */}
         <title>Baby Gifts Albania | Dhurata Luksoze për Bebë – Shporta & Kutia Dhuratë | Tiranë</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="baby gifts, dhurata bebë, shporta dhuratë, femije, bebe, dhurata, shporta, kids body, socks, brushes, teddy bears, arushe teddy, çorape, furça, dhurata për femije, baby shower, welcome baby, tiranë, albania, shqipëri, personalizim, artizanal dhurata bebe, dhurata bebë, dhurata për bebë, dhurata per bebe,
-                    dhurata femije, dhurata për fëmijë, dhurata per femije,
-                    rroba bebe, rroba për bebë, rroba per bebe,
-                    shporte dhurate, shportë dhuratë, shporte per bebe,
-                    kids body, body bebe, çorape bebe, corape bebe,
-                    furça bebe, furca bebe, arushe teddy, lodra bebe,
-                    baby gifts, baby shower, welcome baby,
-                    dhurata shqiperi, dhurata tirane, dhurata albania,
-                    beba, bebja, i sapolindur, sapolindur,
-                    dhurata per nene te reja, dhurata personalizuara,
-                    set dhurate bebe, kuti dhurate bebe" />
+        <meta name="keywords" content="baby gifts, dhurata bebë, shporta dhuratë, femije, bebe, dhurata, shporta, kids body, socks, brushes, teddy bears, arushe teddy, çorape, furça, dhurata për femije, baby shower, welcome baby, tiranë, albania, shqipëri, personalizim, artizanal dhurata bebe, dhurata bebe, dhurata për bebë, dhurata per bebe, dhurata femije, dhurata për fëmijë, dhurata per femije, rroba bebe, rroba për bebë, rroba per bebe, shporte dhurate, shportë dhuratë, shporte per bebe, kids body, body bebe, çorape bebe, corape bebe, furça bebe, furca bebe, arushe teddy, lodra bebe, baby gifts, baby shower, welcome baby, dhurata shqiperi, dhurata tirane, dhurata albania, beba, bebja, i sapolindur, sapolindur, dhurata per nene te reja, dhurata personalizuara, set dhurate bebe, kuti dhurate bebe" />
         <meta name="author" content="Baby Gifts Albania" />
         <meta name="robots" content="index, follow" />
         <meta name="language" content="Albanian" />
@@ -161,10 +152,23 @@ export default function Home({ products }) {
   );
 }
 
-export async function getStaticProps() {
-  const products = getProducts();
-  return {
-    props: { products },
-    revalidate: 60, // ISR: revalidate every 60s
-  };
+// getServerSideProps — thirr MongoDB direkt, jo lib/products.js (fs)
+export async function getServerSideProps() {
+  try {
+    await connectDB();
+    const raw = await Product.find({}).sort({ createdAt: -1 }).lean();
+    const products = raw.map(p => {
+      const { _id, createdAt, updatedAt, __v, ...rest } = p;
+      return {
+        ...rest,
+        id: _id.toString(),
+        createdAt: createdAt?.toISOString() || null,
+        updatedAt: updatedAt?.toISOString() || null,
+      };
+    });
+    return { props: { products } };
+  } catch (err) {
+    console.error('Gabim në ngarkimin e produkteve:', err);
+    return { props: { products: [] } };
+  }
 }

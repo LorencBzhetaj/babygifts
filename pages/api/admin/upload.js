@@ -1,19 +1,29 @@
 // pages/api/admin/upload.js
-// Handles image uploads for products
-// Uses multipart/form-data via formidable
+// Kërkon: npm install cloudinary formidable
+// Kërkon në .env.local:
+//   CLOUDINARY_CLOUD_NAME=...
+//   CLOUDINARY_API_KEY=...
+//   CLOUDINARY_API_SECRET=...
 
+import { v2 as cloudinary } from 'cloudinary';
 import formidable from 'formidable';
-import fs from 'fs';
-import path from 'path';
 import { parse } from 'cookie';
+import { verifySessionToken } from '../../../lib/auth';
 
 export const config = {
   api: { bodyParser: false },
 };
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 function isAuthenticated(req) {
   const cookies = parse(req.headers.cookie || '');
-  return cookies['admin_session'] === (process.env.ADMIN_PASSWORD || 'babygifts2025admin');
+  const token = cookies['admin_session'];
+  return token ? verifySessionToken(token) : false;
 }
 
 export default async function handler(req, res) {
@@ -25,30 +35,40 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const uploadDir = path.join(process.cwd(), 'public', 'images', 'products');
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  }
-
   const form = formidable({
-    uploadDir,
-    keepExtensions: true,
     maxFileSize: 5 * 1024 * 1024, // 5MB
     filter: ({ mimetype }) => mimetype && mimetype.startsWith('image/'),
   });
 
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, async (err, fields, files) => {
     if (err) {
       console.error('Upload error:', err);
       return res.status(500).json({ error: 'Ngarkimi dështoi' });
     }
 
-    const fileArray = files.file ? (Array.isArray(files.file) ? files.file : [files.file]) : [];
-    const urls = fileArray.map(f => {
-      const filename = path.basename(f.filepath);
-      return `/images/products/${filename}`;
-    });
+    const fileArray = files.file
+      ? Array.isArray(files.file) ? files.file : [files.file]
+      : [];
 
-    return res.status(200).json({ urls });
+    if (fileArray.length === 0) {
+      return res.status(400).json({ error: 'Asnjë imazh nuk u dërgua' });
+    }
+
+    try {
+      const uploads = await Promise.all(
+        fileArray.map(f =>
+          cloudinary.uploader.upload(f.filepath, {
+            folder: 'babygifts/products',
+            transformation: [{ width: 1200, crop: 'limit', quality: 'auto' }],
+          })
+        )
+      );
+
+      const urls = uploads.map(u => u.secure_url);
+      return res.status(200).json({ urls });
+    } catch (uploadErr) {
+      console.error('Cloudinary error:', uploadErr);
+      return res.status(500).json({ error: 'Ngarkimi në Cloudinary dështoi' });
+    }
   });
 }
