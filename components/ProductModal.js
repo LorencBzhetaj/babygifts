@@ -85,10 +85,9 @@ flex-direction:column;
 }
 
 .pm-img-box{
-width:100%;
-background:#f5dede;
-border-radius:1.2rem 1.2rem 0 0;
-overflow:hidden;
+ display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pm-img-mobile{
@@ -98,8 +97,10 @@ object-fit:contain;
 display:block;
 }
 
-.pm-img-desktop{
-display:none;
+.pm-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .pm-thumbs{
@@ -308,22 +309,13 @@ padding:2rem 2rem 2rem 1.5rem;
             <div className="pm-left">
               <div className="pm-img-box">
                 <Image
-                  className="pm-img-mobile"
-                  src={images[activeImg]}
-                  alt={product.name}
-                  width={760}
-                  height={600}
-                  priority
-                />
-
-                <Image
-                  className="pm-img-desktop"
-                  src={images[activeImg]}
-                  alt={product.name}
-                  fill
-                  priority
-                  sizes="440px"
-                />
+  className="pm-img"
+  src={images[activeImg]}
+  alt={product.name}
+  width={800}
+  height={600}
+  priority
+/>
               </div>
 
               {images.length > 1 && (
