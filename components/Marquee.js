@@ -4,7 +4,7 @@ export default function Marquee() {
     'Punime me Dorë 100%',
     'Personalizim me Emrin e Bebit',
     'Dorëzim Tiranë 48h',
-    'WhatsApp 0697 536 334',
+    'WhatsApp +355 69 288 1903  ',
     'Dhurata për Vajza & Djem',
     'Materiale Premium',
     'Shporta Artizanale',

@@ -36,7 +36,7 @@ export default function Navbar() {
         <li><a href="#contact" onClick={e => { e.preventDefault(); scrollTo('contact'); }}>Kontakt</a></li>
         <li>
           <a
-            href="https://wa.me/355697536334"
+            href="https://wa.me/355692881903"
             className={styles.cta}
             target="_blank"
             rel="noopener noreferrer"

@@ -13,7 +13,7 @@ export default function Home({ products }) {
   const siteUrl = 'https://www.babygiftsalbania.al';
   const siteName = 'Baby Gifts Albania';
   const description =
-    'Dhurata të personalizuara dhe luksoze për bebë të sapolindur. Shporta dhe kutia dhuratë artizanale për vajza dhe djem. Kids body, çorape, furça, arushe teddy dhe shumë më tepër. Porosit tani – Tiranë. Tel: 0697536334';
+    'Dhurata të personalizuara dhe luksoze për bebë të sapolindur. Shporta dhe kutia dhuratë artizanale për vajza dhe djem. Kids body, çorape, furça, arushe teddy dhe shumë më tepër. Porosit tani – Tiranë. Tel: +355 69 288 1903';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -25,7 +25,7 @@ export default function Home({ products }) {
         alternateName: 'Dhurata për Bebin',
         description,
         url: siteUrl,
-        telephone: '+355697536334',
+        telephone: '+355 69 288 1903',
         image: `${siteUrl}/images/logo.png`,
         logo: {
           '@type': 'ImageObject',
@@ -49,7 +49,7 @@ export default function Home({ products }) {
         },
         sameAs: [
           'https://www.instagram.com/dhurata_per_bebin',
-          'https://wa.me/355697536334',
+          'https://wa.me/355692881903',
         ],
         priceRange: '4500 - 5000 ALL',
         currenciesAccepted: 'ALL',

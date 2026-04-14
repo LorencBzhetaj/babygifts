@@ -29,7 +29,7 @@ export default function Products({ products }) {
             </h2>
           </div>
           <a
-            href="https://wa.me/355697536334"
+            href="https://wa.me/355 69 288 1903"
             className="btnPrimary"
             style={{ whiteSpace: 'nowrap' }}
             target="_blank"
@@ -65,7 +65,7 @@ export default function Products({ products }) {
                   <div className={styles.price}>{product.price?.toLocaleString('sq-AL')} Lekë</div>
                   <div className={styles.actions}>
                     <a
-                      href={`https://wa.me/355697536334?text=${encodeURIComponent('Dua të porosit: ' + product.name)}`}
+                      href={`https://wa.me/355692881903?text=${encodeURIComponent('Dua të porosit: ' + product.name)}`}
                       className={styles.btnWa}
                       target="_blank"
                       rel="noopener noreferrer"

@@ -383,7 +383,7 @@ padding:2rem 2rem 2rem 1.5rem;
               <div className="pm-actions">
 
                 <a
-                  href={`https://wa.me/355697536334?text=${waMsg}`}
+                  href={`https://wa.me/355692881903?text=${waMsg}`}
                   className="pm-wa-btn"
                   target="_blank"
                   rel="noopener noreferrer"

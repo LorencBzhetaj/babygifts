@@ -109,5 +109,5 @@ Shto variablat e mjedisit në Vercel Dashboard:
 
 ## 📞 Kontakt
 - Tel: 0697 536 334
-- WhatsApp: [wa.me/355697536334](https://wa.me/355697536334)
+- WhatsApp: [wa.me/355697536334](https://wa.me/+355 69 288 1903)
 - Instagram: @dhurata_per_bebin

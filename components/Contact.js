@@ -28,8 +28,8 @@ export default function Contact() {
       <div className={styles.grid}>
         <div className={`${styles.cards} r r2`}>
           {[
-            { href: 'tel:0697536334', icon: '📞', title: 'Na Telefononi', val: '0697 536 334', ext: false },
-            { href: 'https://wa.me/355697536334', icon: '💬', title: 'WhatsApp', val: 'Mesazh i drejtpërdrejtë', ext: true },
+            { href: 'tel:355692881903', icon: '📞', title: 'Na Telefononi', val: '+355 69 288 1903', ext: false },
+            { href: 'https://wa.me/355692881903', icon: '💬', title: 'WhatsApp', val: 'Mesazh i drejtpërdrejtë', ext: true },
             { href: 'https://www.instagram.com/dhurata_per_bebin', icon: '📸', title: 'Instagram', val: '@dhurata_per_bebin', ext: true },
             { href: null, icon: '📍', title: 'Vendndodhja', val: 'Tiranë, Shqipëri 🇦🇱', ext: false },
           ].map((c) => (

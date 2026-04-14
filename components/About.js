@@ -75,7 +75,7 @@ export default function About() {
             { icon: '✨', title: 'Personalizim me Emër Ari', desc: 'Emri i bebit i shkruar me shkronja ari — dhurata unike e llojit të saj.' },
             { icon: '🌸', title: 'Materiale Premium & Organike', desc: 'Veshje organike, fjongo velvet dhe lule të thata të zgjedhura me kujdes.' },
             { icon: '🎁', title: 'Paketim Luksoz', desc: 'Çdo dhuratë vjen e paketuar bukur, gati për t\'u dhuruar direkt.' },
-            { icon: '🚀', title: 'Dorëzim i Shpejtë', desc: 'Brenda 48 orëve në Tiranë. Porosi via WhatsApp 0697 536 334.' },
+            { icon: '🚀', title: 'Dorëzim i Shpejtë', desc: 'Brenda 48 orëve në Tiranë. Porosi via WhatsApp +355 69 288 1903.' },
           ].map((f) => (
             <div key={f.title} className={styles.feat}>
               <div className={styles.featIcon}>{f.icon}</div>
