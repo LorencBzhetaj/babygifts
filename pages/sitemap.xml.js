@@ -3,7 +3,7 @@ export default function Sitemap() {
 }
 
 export async function getServerSideProps({ res }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = 'https://www.dhurataperbebe.com';
   const today = new Date().toISOString().split('T')[0];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -34,7 +34,7 @@ export async function getServerSideProps({ res }) {
   </url>
 </urlset>`;
 
- res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
   res.write(sitemap);
   res.end();
 
