@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import Script from 'next/script';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -24,6 +25,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-FJG8TTB6TH"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-FJG8TTB6TH');
+        `}
+      </Script>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
