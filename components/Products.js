@@ -1,94 +1,38 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import ProductModal from './ProductModal';
 import styles from './Products.module.css';
 
+function catalogImage(product) {
+  const original = product.mainImage || product.images?.[0] || '/images/hero-bg.jpg';
+  const match = original.match(/^\/images\/product([1-6])\.jpg$/);
+  return match ? '/images/catalog/product' + match[1] + '.webp' : original;
+}
+
 export default function Products({ products }) {
-  const ref = useRef(null);
   const [selected, setSelected] = useState(null);
-
-  useEffect(() => {
-    const els = ref.current?.querySelectorAll('.r') || [];
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-    els.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <>
-      <section id="products" className={styles.products} ref={ref}>
-        <div className={`${styles.header} r`}>
-          <div>
-            <span className="sTag">✦ Koleksioni</span>
-            <h2 className="serifH2">
-              Dhurata <em>të Veçanta</em><br />
-              për Bebën Tuaj
-            </h2>
-          </div>
-          <a
-            href="https://wa.me/355 69 288 1903"
-            className="btnPrimary"
-            style={{ whiteSpace: 'nowrap' }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Porosit Tani →
-          </a>
+  return <>
+      <section id="products" className={styles.products}>
+        <div className={styles.header}>
+          <h2 className="serifH2">Dhurata <em>të Veçanta</em><br />për Bebën Tuaj</h2>
+          <a href="https://wa.me/355692881903" className="btnPrimary" target="_blank" rel="noopener noreferrer">Porosit Tani →</a>
         </div>
-
         <div className={styles.grid}>
-          {products.map((product, i) => {
-            const delay = i % 3;
-            return (
-              <div
-                key={product.id}
-                className={`${styles.card} r ${delay === 1 ? 'r2' : delay === 2 ? 'r3' : ''}`}
-              >
-                <div className={styles.imgWrap}>
-                  <div className={styles.imgInner}>
-                    <Image
-                      src={product.mainImage || product.images?.[0] || '/images/hero-bg.jpg'}
-                      alt={`${product.name} - Baby Gifts Albania`}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                  <span className={styles.badge}>{product.badge}</span>
-                </div>
-                <div className={styles.body}>
-                  <div className={styles.name}>{product.name}</div>
-                  <p className={styles.desc}>{product.description?.substring(0, 100)}...</p>
-                  <div className={styles.price}>{product.price?.toLocaleString('sq-AL')} Lekë</div>
-                  <div className={styles.actions}>
-                    <a
-                      href={`https://wa.me/355692881903?text=${encodeURIComponent('Dua të porosit: ' + product.name)}`}
-                      className={styles.btnWa}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      💛 Porosit
-                    </a>
-                    <button
-                      className={styles.btnDetails}
-                      onClick={() => setSelected(product)}
-                    >
-                      🔍 Detaje
-                    </button>
-                  </div>
-                </div>
+          {products.map(product => <article className={styles.product} key={product.id}>
+            <button className={styles.productLink} onClick={() => setSelected(product)} aria-label={'Shiko detajet: ' + product.name}>
+              <div className={styles.image}><Image src={catalogImage(product)} alt={product.name + ' - Baby Gifts Albania'} width={1000} height={1000} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" /></div>
+              <h3>{product.name}</h3>
+            </button>
+              <p className={styles.description}>{product.description?.substring(0, 100)}...</p>
+              <p className={styles.price}>{String(product.price).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} <span>Lekë</span></p>
+              <div className={styles.actions}>
+                <a className={styles.orderButton} href={`https://wa.me/355692881903?text=${encodeURIComponent('Dua të porosit: ' + product.name)}`} target="_blank" rel="noopener noreferrer">Porosit</a>
+                <button className={styles.detailsButton} onClick={() => setSelected(product)}>Detaje</button>
               </div>
-            );
-          })}
+          </article>)}
         </div>
       </section>
 
-      {selected && (
-        <ProductModal product={selected} onClose={() => setSelected(null)} />
-      )}
-    </>
-  );
+    {selected && <ProductModal product={selected} onClose={() => setSelected(null)} />}
+  </>;
 }
